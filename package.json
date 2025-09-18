@@ -1,0 +1,42 @@
+{
+  "name": "projectcrane",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "test:e2e": "nightwatch tests/e2e/*",
+    "test:unit": "nightwatch src/**/__tests__/*",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "tailwindcss": "^4.1.13",
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@nightwatch/vue": "^3.1.2",
+    "@tsconfig/node22": "^22.0.2",
+    "@types/node": "^22.16.5",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.7.0",
+    "chromedriver": "^138.0.4",
+    "geckodriver": "^5.0.0",
+    "nightwatch": "^3.12.2",
+    "npm-run-all2": "^8.0.4",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.0",
+    "vite": "npm:rolldown-vite@latest",
+    "vite-plugin-nightwatch": "^0.4.6",
+    "vite-plugin-vue-devtools": "^8.0.0",
+    "vue-tsc": "^3.0.4"
+  }
+}
