@@ -1,56 +1,32 @@
 # projectCrane
 
-This template should help get you started developing with Vue 3 in Vite.
+Web application with simple, yet complex interface with many trackers to make your life easier.
+Services to expect:
 
-## Recommended IDE Setup
+- Habits tracker
+- Money tracker
+- notes
+- HealthCare tracker
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Habits tracker
 
-## Type Support for `.vue` Imports in TS
+Many of us have problem to follow routine or make a new one.
+With our habits tracker, you now have a new routine easely implemented to your life.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Money tracker
 
-## Customize configuration
+Managing finances is crucial skill in today's world.
+That's why you will have one in your projectCrane's dashboard.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Notes
 
-## Project Setup
+Quickly write your thoughts or any other note for later...
 
-```sh
-npm install
-```
+### HealthCare tracker
 
-### Compile and Hot-Reload for Development
+healthCare tracker is complex tracker which includes many trackers like workout tracker, sleep tracker and more in future
+<hr/>
 
-```sh
-npm run dev
-```
+Enjoy using our brand new web application made in Vue.js
 
-### Type-Check, Compile and Minify for Production
 
-```sh
-npm run build
-```
-
-### Run End-to-End Tests with [Nightwatch](https://nightwatchjs.org/)
-
-```sh
-# When using CI, the project must be built first.
-npm run build
-
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chrome
-npm run test:e2e -- --env chrome
-# Runs the tests of a specific file
-npm run test:e2e -- tests/e2e/example.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-    
-### Run Headed Component Tests with [Nightwatch Component Testing](https://nightwatchjs.org/guide/component-testing/introduction.html)
-  
-```sh
-npm run test:unit
-npm run test:unit -- --headless # for headless testing
-```
