@@ -51,7 +51,7 @@ export default {
       const generatedDays: Day[] = [];
       
       // Generate 6 days (5 past days, today, 3 future days)
-      for (let i = -3; i <= 5; i++) {
+      for (let i = 1; i <= 6; i++) {
         const date = new Date(today);
         date.setDate(today.getDate() + i);
         
@@ -138,8 +138,8 @@ export default {
         <router-view></router-view>
 
         <aside class="w-full border-2 border-gray-500 h-dvh rounded-3xl top-25 relative">
-          <h3 class="text-3xl text-main text-center border-b-2 border-main">Habits Tracker</h3>
-          <div class="grid grid-cols-3 text-main p-5 gap-4">
+          <h3 class="text-3xl text-main text-center border-b-2 border-main">To Do tracker</h3>
+          <div class="grid grid-cols-2 text-main p-5 gap-4">
             
             <!-- Generate cards for each day -->
             <div 

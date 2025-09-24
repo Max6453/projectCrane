@@ -142,7 +142,7 @@ export default {
     <section>
       <div class="grid grid-cols-2 gap-15 w-full">
         <aside class="w-full border-2 border-gray-500 h-dvh rounded-3xl">
-          <h3 class="text-3xl text-main text-center border-b-2 border-main">Habits Tracker</h3>
+          <h1 class="text-3xl  text-main text-center border-b-2 border-main">Habits Tracker</h1>
           <div class="grid grid-cols-3 text-main p-5 gap-4">
             
             <!-- Generate cards for each day -->
@@ -210,7 +210,7 @@ export default {
       </a>
     </div>
     <span class="relative top-40">
-      <p class="text-center text-xl text-white"> All rights reserved</p>
+      <p class="text-center text-md text-white">Designed and developed by <a href="https://maximharvancik.vercel.app">Maxim Harvančík</a></p>
     </span>
   </footer>
   </section>
