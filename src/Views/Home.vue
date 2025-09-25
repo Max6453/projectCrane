@@ -135,7 +135,7 @@ export default {
 
 
 <template>
-  <section class="top-15 relative p-5">
+   <section class="top-15 relative p-5">
     <div class="pb-10">
       <h3 class="text-3xl text-main">Most Visited trackers</h3>
     </div>
@@ -149,7 +149,7 @@ export default {
             <div 
               v-for="day in days" 
               :key="day.date" 
-              class="border-2 border-main rounded-lg p-4 text-main shadow-sm"
+              class="border-2 border-main rounded-lg p-4 top-10 relative text-main shadow-sm"
             >
               <h4 class="text-lg font-bold text-center mb-3 border-b border-gray-300 pb-2">
                 {{ day.displayDate }}
@@ -170,6 +170,9 @@ export default {
                   </label>
                 </li>
               </ul>
+            </div>
+            <div class="relative top-50 left-180 hover:scale-110 duration-300">
+              <button class="w-30 h-15 bg-green-500 hover:bg-blue-500 duration-300 rounded-4xl overflow-hidden shadow-2xl shadow-black">See history</button>
             </div>
           </div>
         </aside>
