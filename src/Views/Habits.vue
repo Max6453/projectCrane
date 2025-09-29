@@ -12,11 +12,16 @@ interface HabitData {
 interface Day {
   date: string;
   displayDate: string;
+  isCurrentMonth: boolean;
 }
 
 interface Habit {
   key: keyof HabitData[string];
   label: string;
+}
+
+interface CalendarWeek {
+  days: Day[];
 }
 
 export default {
@@ -48,22 +53,25 @@ export default {
   methods: {
     generateDays(): void {
       const today = new Date();
+      const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      const lastDay = lastDayOfMonth.getDate(); // Get the last day of the month (30 or 31)
+      
       const generatedDays: Day[] = [];
       
-      // Generate 6 days (5 past days, today, 3 future days)
-      for (let i = -3; i <= 5; i++) {
-        const date = new Date(today);
-        date.setDate(today.getDate() + i);
-        
-        const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD format
-        const displayDate = this.formatDisplayDate(date);
+      // Add only the days of current month (1 to 30/31)
+      for (let day = 1; day <= lastDay; day++) {
+        const date = new Date(today.getFullYear(), today.getMonth(), day);
+        const dateString = date.toISOString().split('T')[0];
+        const displayDate = day === today.getDate() ? 'Today' : day.toString();
         
         generatedDays.push({
           date: dateString,
-          displayDate: displayDate
+          displayDate: displayDate,
+          isCurrentMonth: true
         });
         
-        // Initialize habit data for this day if it doesn't exist
+        // Initialize habit data
         if (!this.habitData[dateString]) {
           this.habitData[dateString] = {
             gym: false,
@@ -135,76 +143,50 @@ export default {
 
 
 <template>
-   <section class="top-15 relative p-5">
-    <div class="pb-10">
-      <h3 class="text-3xl text-main">Most Visited trackers</h3>
-    </div>
+   <section class="top-30 relative p-5">
     <section>
-      <div class="grid grid-cols-2 gap-15 w-full">
-        <aside class="w-full border-2 border-gray-500 h-220 rounded-3xl">
+      <div class="grid gap-15">
+        <aside class="border-2 border-gray-500 h-220 rounded-3xl">
           <h1 class="text-3xl  text-main text-center border-b-2 border-main">Habits Tracker</h1>
-          <div class="grid grid-cols-3 text-main p-5 gap-4">
-            
-            <!-- Generate cards for each day -->
-            <div 
-              v-for="day in days" 
-              :key="day.date" 
-              class="border-2 border-main rounded-lg p-4 top-10 relative text-main shadow-sm"
-            >
-              <h4 class="text-lg font-bold text-center mb-3 border-b border-gray-300 pb-2">
-                {{ day.displayDate }}
-              </h4>
-              <ul class="space-y-3">
-                <li v-for="habit in habitList" :key="habit.key" class="flex items-center space-x-2">
-                  <input 
-                    type="checkbox" 
-                    :id="`${day.date}-${habit.key}`"
-                    v-model="habitData[day.date][habit.key]"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label 
-                    :for="`${day.date}-${habit.key}`" 
-                    class="text-sm font-medium text-main cursor-pointer"
-                  >
-                    {{ habit.label }}
-                  </label>
-                </li>
-              </ul>
-            </div>
-            <div class="relative left-66 top-20 hover:scale-110 duration-300">
-              <button class="w-30 h-15 bg-green-500 hover:bg-blue-500 duration-300 rounded-4xl overflow-hidden shadow-2xl shadow-black">See history</button>
+          <div class="p-5">
+            <!-- Calendar Grid -->
+            <div class="grid grid-cols-4 gap-5">
+              <div v-for="day in days" 
+                   :key="day.date" 
+                   :class="[
+                     'border rounded p-2',
+                     'min-h-[120px] relative',
+                     'border-main',
+                     day.displayDate === 'Today' ? 'bg-green-700 bg-opacity-50' : ''
+                   ]">
+                <!-- Date Header -->
+                <div class="text-sm font-semibold mb-1 text-main">
+                  {{ day.displayDate }}
+                </div>
+
+                <!-- Habits List -->
+                <div class="space-y-1">
+                  <div v-for="habit in habitList" 
+                       :key="`${day.date}-${habit.key}`" 
+                       class="flex items-center space-x-1">
+                    <input type="checkbox"
+                           :id="`${day.date}-${habit.key}`"
+                           v-model="habitData[day.date][habit.key]"
+                           class="w-3 h-3 text-blue-600 rounded focus:ring-blue-500"/>
+                    <label :for="`${day.date}-${habit.key}`"
+                           class="text-xs text-main truncate">
+                      {{ habit.label }}
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </aside>
-        
-        <!-- SECOND ASIDE LAYOUT -->
-        <aside class="w-full border-2 border-gray-500 h-dvh rounded-3xl">
-          <h3 class="text-3xl text-main text-center border-b-2 border-main">Money tracker</h3>
-          <span class="text-center text-5xl relative top-1/2 left-2/8 text-white">Upgrade to pro</span>
-        </aside>
-      </div>
-
-      <div class="w-full flex flex-col gap-y-10 top-10 relative border-2 border-main text-main rounded-3xl h-dvh">
-        <h3 class="text-main m-7 text-4xl">Notes</h3>
-        <div>
-        <textarea class="w-full border border-main h-30">
-          Write your last journey
-        </textarea>
-      </div>
-        <div>
-        <textarea class="w-full border border-main h-30">
-          Write your last journey
-        </textarea>
         </div>
-        <div>
-        <textarea class="w-full border border-main h-30">
-          Write your last journey
-        </textarea>
-        </div>
-      </div>
-    </section>
+        </section>
     <footer>
-    <div class="top-20 relative">
+    <div class="top-60 relative">
       <a href="#top">
       <svg width="80" height="80" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)" class="right-10 absolute">
       <path d="M12.5304 10.9697C12.3897 10.829 12.1989 10.75 12 10.75C11.8011 10.75 11.6103 10.829 11.4697 10.9697L5.21969 17.2197C5.00519 17.4342 4.94103 17.7568 5.05711 18.037C5.1732 18.3173 5.44668 18.5 5.75002 18.5H18.25C18.5534 18.5 18.8268 18.3173 18.9429 18.037C19.059 17.7568 18.9949 17.4342 18.7804 17.2197L12.5304 10.9697Z" fill="#343C54"/>
@@ -212,7 +194,7 @@ export default {
       </svg>
       </a>
     </div>
-    <span class="relative top-40">
+    <span class="relative top-80">
       <p class="text-center text-md text-white">Designed and developed by <a href="https://maximharvancik.vercel.app">Maxim Harvančík</a></p>
     </span>
   </footer>

@@ -12,7 +12,7 @@
         <router-link to="/to-do" class="hover:text-green-300 bg-hover">
           <li>To-Do app</li>
         </router-link>
-        <router-link to="/to-do" class="hover:text-green-300 bg-hover">
+        <router-link to="/Habits" class="hover:text-green-300 bg-hover">
           <li>Habits tracker</li>
         </router-link>
         <router-link to="/to-do" class="hover:text-green-300 bg-hover">
