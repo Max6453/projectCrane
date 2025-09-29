@@ -150,7 +150,7 @@ export default {
           <h1 class="text-3xl  text-main text-center border-b-2 border-main">Habits Tracker</h1>
           <div class="p-5">
             <!-- Calendar Grid -->
-            <div class="grid grid-cols-4 gap-5">
+            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 max-sm:grid-cols-1 gap-5">
               <div v-for="day in days" 
                    :key="day.date" 
                    :class="[
