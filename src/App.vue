@@ -28,7 +28,11 @@
     </nav>
   </header>
     
-  <router-view></router-view>
+  <router-view v-slot="{ Component }">
+    <transition name="page" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 
   <footer class="top-20 relative">
     <!-- your footer -->

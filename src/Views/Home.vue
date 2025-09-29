@@ -172,7 +172,9 @@ export default {
               </ul>
             </div>
             <div class="relative left-66 top-20 hover:scale-110 duration-300">
+              <a href="/Habits">
               <button class="w-30 h-15 bg-green-500 hover:bg-blue-500 duration-300 rounded-4xl overflow-hidden shadow-2xl shadow-black">See history</button>
+            </a>
             </div>
           </div>
         </aside>
