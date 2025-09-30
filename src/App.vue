@@ -25,6 +25,27 @@
         <li>HealthCare tracker</li>
        </router-link>
       </ul>
+    
+      <div>
+        <div
+          @click="toggleModal"
+          aria-label="toogle modal"
+          :class="isModalOpen ? 'btn-close' : 'btn-open'"
+        class="bg-black size-10 absolute bottom-3 active:border-white hover:border border-white right-15 rounded-full">
+        </div>
+        <div v-if="isModalOpen" class="modal bg-foreground to-green-700 bg-linear-300 right-10 pt-1 top-20 h-50 w-40 rounded-3xl absolute">
+          <span class="text-center">
+            <h3>Welcome back:</h3>
+            <h3 class="text-white">{{ user.name }} </h3>
+          </span>
+          <ul class="border-t-1 flex flex-col gap-y-3 pt-4 text-center text-xl border-gray-500">
+            <li class="hover:underline"><a href="/Account">Your Account</a></li>
+            <li class="hover:underline"><a href="">buy premium</a></li>
+            <li class="hover:underline"><a href="">Support</a></li>
+            <li class="hover:underline"><a href=""></a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </header>
     
@@ -41,6 +62,22 @@
 </template>
 
 <script lang="ts">
-export default {}
-  //b
+
+export default {
+  data() {
+  return {
+   user: {
+        name: "Test Subject",
+        email: "max@example.com"
+      },
+    isModalOpen: false
+  }
+},
+
+  methods: {
+    toggleModal() {
+      this.isModalOpen = !this.isModalOpen
+    }
+  },
+}
 </script>
