@@ -167,7 +167,7 @@ export default {
    <section class="top-30 relative p-5 ubuntu-regular">
     <section>
       <div class="grid gap-15">
-        <aside class="border-2 border-gray-500 h-330 rounded-3xl">
+        <aside class="border-2 border-gray-500 h-400 max-sm:h-730 rounded-3xl">
           <h1 class="text-3xl pb-5 pt-5 text-main text-center border-b-2 border-main">Habits Tracker</h1>
           <button 
             @click="clearAllHabits" 
@@ -177,7 +177,7 @@ export default {
           </button>
           <div class="p-5 pt-5">
             <!-- Calendar Grid -->
-            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 max-sm:grid-cols-1 gap-5">
+            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 max-sm:grid-cols-2 gap-5">
               <div v-for="day in days" 
                    :key="day.date" 
                    :class="[

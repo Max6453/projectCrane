@@ -140,10 +140,10 @@ export default {
       <h3 class="text-3xl text-main">Most Visited trackers</h3>
     </div>
     <section>
-      <div class="grid grid-cols-2 gap-15 w-full">
-        <aside class="w-full border-2 border-gray-500 h-220 rounded-3xl">
-          <h1 class="text-3xl  text-main text-center border-b-2 border-main">Habits Tracker</h1>
-          <div class="grid grid-cols-3 text-main p-5 gap-4">
+      <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-15 w-full">
+        <aside class="w-full border-2 border-gray-500 h-220 max-sm:h-570 rounded-3xl">
+          <h1 class="text-3xl text-main text-center border-b-2 border-main">Habits Tracker</h1>
+          <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 text-main p-5 gap-4">
             
             <!-- Generate cards for each day -->
             <div 
@@ -190,7 +190,7 @@ export default {
                 </li>
               </ul>
             </div>
-            <div class="relative left-66 top-10 hover:scale-110 duration-300">
+            <div class="relative left-66 max-sm:left-0 max-sm:pl-50 top-10 hover:scale-110 duration-300">
               <a href="/Habits">
               <button class="w-30 h-15 bg-green-500 hover:bg-blue-500 duration-300 rounded-4xl overflow-hidden shadow-2xl shadow-black">See history</button>
             </a>
@@ -199,13 +199,13 @@ export default {
         </aside>
         
         <!-- SECOND ASIDE LAYOUT -->
-        <aside class="w-full border-2 border-gray-500 h-dvh rounded-3xl">
+        <aside class="w-full border-2 max-sm:top-10 relative border-gray-500 h-dvh rounded-3xl">
           <h3 class="text-3xl text-main text-center border-b-2 border-main">Money tracker</h3>
           <span class="text-center text-5xl relative top-1/2 left-2/8 text-white">Upgrade to pro</span>
         </aside>
       </div>
 
-      <div class="w-full flex flex-col gap-y-10 top-10 relative border-2 border-main text-main rounded-3xl h-dvh">
+      <div class="w-full flex flex-col gap-y-10 top-10 max-sm:top-20 relative border-2 border-main text-main rounded-3xl h-dvh">
         <h3 class="text-main m-7 text-4xl">Notes</h3>
         <div>
         <textarea class="w-full border border-main h-30">
@@ -225,7 +225,7 @@ export default {
       </div>
     </section>
     <footer>
-    <div class="top-20 relative">
+    <div class="top-20 max-sm:top-40 relative">
       <a href="#top">
       <svg width="80" height="80" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)" class="right-10 absolute">
       <path d="M12.5304 10.9697C12.3897 10.829 12.1989 10.75 12 10.75C11.8011 10.75 11.6103 10.829 11.4697 10.9697L5.21969 17.2197C5.00519 17.4342 4.94103 17.7568 5.05711 18.037C5.1732 18.3173 5.44668 18.5 5.75002 18.5H18.25C18.5534 18.5 18.8268 18.3173 18.9429 18.037C19.059 17.7568 18.9949 17.4342 18.7804 17.2197L12.5304 10.9697Z" fill="#343C54"/>
@@ -233,7 +233,7 @@ export default {
       </svg>
       </a>
     </div>
-    <span class="relative top-40">
+    <span class="relative top-40 max-sm:top-60">
       <p class="text-center text-md text-white">Designed and developed by <a href="https://maximharvancik.vercel.app">Maxim Harvančík</a></p>
     </span>
   </footer>

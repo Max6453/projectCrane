@@ -96,7 +96,7 @@ export default {
     },
 
     loadFromLocalStorage(): void {
-      const saved = localStorage.getItem('dailyHabits');
+      const saved = localStorage.getItem('ToDoList');
       if (saved) {
         try {
           const parsedData: HabitData = JSON.parse(saved);
@@ -120,7 +120,7 @@ export default {
 
     saveToLocalStorage(): void {
       try {
-        localStorage.setItem('dailyHabits', JSON.stringify(this.habitData));
+        localStorage.setItem('ToDoList', JSON.stringify(this.habitData));
       } catch (error) {
         console.error('Error saving habit data to localStorage:', error);
       }
@@ -135,7 +135,7 @@ export default {
     <aside
       class="w-2/3 border-2 border-gray-500 h-xl rounded-3xl top-25 relative">
       <h3 class="text-3xl text-main text-center border-b-2 border-main">To-Do list</h3>
-      <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 text-center text-main p-5 gap-6">
+      <div class="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 text-center text-main p-5 gap-6">
         <!-- Generate cards for each day -->
         <div 
           v-for="day in days" 
