@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
 :root{
     --background: #1f1f1f;
     --foreground: #26e400;
     --text-main: #ffff;
     --border-main-color: #8d8d8d;
     background: var(--background);
+}
+
+.text{
+    font-family: Ubuntu, sans-serif;
 }
 
 @theme inline{
@@ -17,6 +24,154 @@
 
 html{
     scroll-behavior: smooth;
+}
+
+/* Custom checkbox styles */
+.habit-checkbox {
+    width: 1rem;
+    height: 1rem;
+    appearance: none;
+    border: 2px solid #26e400;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    background: transparent;
+}
+
+.habit-checkbox:checked {
+    background: #26e400;
+    border-color: #26e400;
+}
+
+.habit-checkbox:hover {
+    border-color: #1fb300;
+}
+
+.habit-checkbox:checked:hover {
+    background: #1fb300;
+    border-color: #1fb300;
+}
+
+.habit-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.habit-checkbox-container {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+}
+
+.habit-checkbox-container:hover {
+    background-color: rgba(38, 228, 0, 0.1);
+}
+
+/* Custom checkbox styles */
+.habit-checkbox {
+    @apply appearance-none w-4 h-4 border-2 border-green-500 rounded 
+           checked:bg-green-500 cursor-pointer transition-all duration-200 
+           hover:border-green-400 checked:hover:bg-green-400;
+    position: relative;
+}
+
+.habit-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.habit-checkbox-container {
+    @apply flex items-center hover:bg-green-500/10 p-1 rounded transition-colors duration-200;
+}
+
+/* Custom Checkbox Styles */
+.custom-checkbox {
+    position: relative;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    background-color: transparent;
+    border: 2px solid #26e400;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+    background-color: rgba(38, 228, 0, 0.1);
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: #26e400;
+    border-color: #26e400;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: all 0.2s ease;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Add animation for checking */
+.custom-checkbox input:checked ~ .checkmark {
+    animation: check 0.3s ease;
+}
+
+@keyframes check {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Page Transition Animations */
@@ -66,4 +221,18 @@ html{
 .modal-leave-from {
     opacity: 1;
     transform: translateY(0);
+}
+
+.checkbox:hover input ~ .checkmark {
+  background-color: #c095c0;
+}
+.checkbox input:checked ~ .checkmark {
+  background-color: #1c09ac;
+}
+.checkbox .checkmark:after {
+  top: -5px;
+  width: 5px;
+  height: 10px;
+  left: 2px;
+  color: white;
 }

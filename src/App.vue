@@ -15,13 +15,13 @@
         <router-link to="/Habits" class="hover:text-green-300 bg-hover">
           <li>Habits tracker</li>
         </router-link>
-        <router-link to="/to-do" class="hover:text-green-300 bg-hover">
+        <router-link to="/money-tracker" class="hover:text-green-300 bg-hover">
           <li>Money tracker</li>
         </router-link>
-        <router-link to="/to-do" class="hover:text-green-300 bg-hover">
+        <router-link to="/test" class="hover:text-green-300 bg-hover">
           <li>Notes</li>
         </router-link>
-       <router-link to="/to-do" class="hover:text-green-300 bg-hover">
+       <router-link to="healthcare-tracker" class="hover:text-green-300 bg-hover">
         <li>HealthCare tracker</li>
        </router-link>
       </ul>

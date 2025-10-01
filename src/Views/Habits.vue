@@ -136,6 +136,27 @@ export default {
       } catch (error) {
         console.error('Error saving habit data to localStorage:', error);
       }
+    },
+
+    clearAllHabits(): void {
+      // Show confirmation dialog
+      if (confirm('Are you sure you want to clear all habit data? This cannot be undone.')) {
+        // Reset all habit data for each day
+        this.days.forEach(day => {
+          this.habitData[day.date] = {
+            gym: false,
+            morningRoutine: false,
+            read: false,
+            meditate: false
+          };
+        });
+        
+        // Clear localStorage
+        localStorage.removeItem('dailyHabits');
+        
+        // Save the cleared state
+        this.saveToLocalStorage();
+      }
     }
   }
 }
@@ -143,12 +164,18 @@ export default {
 
 
 <template>
-   <section class="top-30 relative p-5">
+   <section class="top-30 relative p-5 ubuntu-regular">
     <section>
       <div class="grid gap-15">
-        <aside class="border-2 border-gray-500 h-220 rounded-3xl">
-          <h1 class="text-3xl  text-main text-center border-b-2 border-main">Habits Tracker</h1>
-          <div class="p-5">
+        <aside class="border-2 border-gray-500 h-330 rounded-3xl">
+          <h1 class="text-3xl pb-5 pt-5 text-main text-center border-b-2 border-main">Habits Tracker</h1>
+          <button 
+            @click="clearAllHabits" 
+            class="bg-red-500 hover:bg-red-600 duration-300 rounded-4xl w-30 h-10 m-4 text-white font-medium"
+          >
+            Clear all
+          </button>
+          <div class="p-5 pt-5">
             <!-- Calendar Grid -->
             <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 max-sm:grid-cols-1 gap-5">
               <div v-for="day in days" 
@@ -169,13 +196,36 @@ export default {
                   <div v-for="habit in habitList" 
                        :key="`${day.date}-${habit.key}`" 
                        class="flex items-center space-x-1">
-                    <input type="checkbox"
-                           :id="`${day.date}-${habit.key}`"
-                           v-model="habitData[day.date][habit.key]"
-                           class="w-3 h-3 text-blue-600 rounded focus:ring-blue-500"/>
-                    <label :for="`${day.date}-${habit.key}`"
-                           class="text-xs text-main truncate">
-                      {{ habit.label }}
+                    <label :for="`${day.date}-${habit.key}`" class="flex text-white items-center cursor-pointer">
+                      <!-- Hidden checkbox for v-model -->
+                      <input 
+                        type="checkbox" 
+                        :id="`${day.date}-${habit.key}`"
+                        v-model="habitData[day.date][habit.key]"
+                        class="sr-only peer"
+                      />
+                      
+                      <!-- Custom styled checkbox -->
+                      <span
+                        class="w-5 h-5 border-2 border-gray-400 rounded 
+                        flex items-center justify-center
+                        peer-checked:bg-foreground peer-checked:border-main
+                        transition-colors duration-200"
+                      >
+                        <!-- Checkmark -->
+                        <svg 
+                          v-if="habitData[day.date][habit.key]" 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          class="w-4 h-4 text-white" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                        >
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </span>
+                      
+                      <span class="ml-2">{{ habit.label}}</span>
                     </label>
                   </div>
                 </div>
@@ -186,7 +236,7 @@ export default {
         </div>
         </section>
     <footer>
-    <div class="top-60 relative">
+    <div class="top-30 relative">
       <a href="#top">
       <svg width="80" height="80" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)" class="right-10 absolute">
       <path d="M12.5304 10.9697C12.3897 10.829 12.1989 10.75 12 10.75C11.8011 10.75 11.6103 10.829 11.4697 10.9697L5.21969 17.2197C5.00519 17.4342 4.94103 17.7568 5.05711 18.037C5.1732 18.3173 5.44668 18.5 5.75002 18.5H18.25C18.5534 18.5 18.8268 18.3173 18.9429 18.037C19.059 17.7568 18.9949 17.4342 18.7804 17.2197L12.5304 10.9697Z" fill="#343C54"/>
@@ -194,7 +244,7 @@ export default {
       </svg>
       </a>
     </div>
-    <span class="relative top-80">
+    <span class="relative top-40">
       <p class="text-center text-md text-white">Designed and developed by <a href="https://maximharvancik.vercel.app">Maxim Harvančík</a></p>
     </span>
   </footer>

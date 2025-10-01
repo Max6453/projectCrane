@@ -135,7 +135,7 @@ export default {
 
 
 <template>
-   <section class="top-15 relative p-5">
+   <section class="top-25 relative p-5">
     <div class="pb-10">
       <h3 class="text-3xl text-main">Most Visited trackers</h3>
     </div>
@@ -156,22 +156,41 @@ export default {
               </h4>
               <ul class="space-y-3">
                 <li v-for="habit in habitList" :key="habit.key" class="flex items-center space-x-2">
-                  <input 
-                    type="checkbox" 
-                    :id="`${day.date}-${habit.key}`"
-                    v-model="habitData[day.date][habit.key]"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label 
-                    :for="`${day.date}-${habit.key}`" 
-                    class="text-sm font-medium text-main cursor-pointer"
-                  >
-                    {{ habit.label }}
-                  </label>
+                   <label :for="`${day.date}-${habit.key}`" class="flex text-white items-center cursor-pointer">
+                      <!-- Hidden checkbox for v-model -->
+                      <input 
+                        type="checkbox" 
+                        :id="`${day.date}-${habit.key}`"
+                        v-model="habitData[day.date][habit.key]"
+                        class="sr-only peer"
+                      />
+                      
+                      <!-- Custom styled checkbox -->
+                      <span
+                        class="w-5 h-5 border-2 border-gray-400 rounded 
+                        flex items-center justify-center
+                        peer-checked:bg-foreground peer-checked:border-main
+                        transition-colors duration-200"
+                      >
+                        <!-- Checkmark -->
+                        <svg 
+                          v-if="habitData[day.date][habit.key]" 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          class="w-4 h-4 text-white" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                        >
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </span>
+                      
+                      <span class="ml-2">{{ habit.label}}</span>
+                    </label>
                 </li>
               </ul>
             </div>
-            <div class="relative left-66 top-20 hover:scale-110 duration-300">
+            <div class="relative left-66 top-10 hover:scale-110 duration-300">
               <a href="/Habits">
               <button class="w-30 h-15 bg-green-500 hover:bg-blue-500 duration-300 rounded-4xl overflow-hidden shadow-2xl shadow-black">See history</button>
             </a>

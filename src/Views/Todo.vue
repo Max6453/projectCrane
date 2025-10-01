@@ -1,4 +1,6 @@
 <script lang="ts">
+import Habits from './Habits.vue';
+
 interface HabitData {
   [date: string]: {
     gym: boolean;
@@ -25,6 +27,7 @@ export default {
   name: 'Todo',
   data() {
     return {
+      checked: false,
       habitList: [
         { key: 'gym', label: 'Gym' },
         { key: 'morningRoutine', label: 'Morning Routine' },
@@ -143,20 +146,45 @@ export default {
             {{ day.displayDate }}
           </h4>
           <ul class="space-y-3">
-            <li v-for="habit in habitList" :key="habit.key" class="flex items-center space-x-2">
-              <input 
-                type="checkbox" 
-                :id="`${day.date}-${habit.key}`"
-                v-model="habitData[day.date][habit.key]"
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <input 
-                :id="`${day.date}-${habit.key}-note`"
-                v-model="habitData[day.date].notes[habit.key]"
-                @input="saveToLocalStorage"
-                class="w-full text-sm font-medium text-main cursor-pointer"
-                placeholder="enter data"
-              />
+            <li v-for="habit in habitList" :key="habit.key" class="grid grid-cols-1 items-center space-x-2">
+              <label :for="`${day.date}-${habit.key}`" class="flex items-center cursor-pointer">
+                <!-- Hidden checkbox for v-model -->
+                <input 
+                  type="checkbox" 
+                  :id="`${day.date}-${habit.key}`"
+                  v-model="habitData[day.date][habit.key]"
+                  class="sr-only peer"
+                />
+
+                <!-- Custom styled checkbox -->
+                <span
+                  class="w-5 h-5 border-2 border-gray-400 rounded 
+                  flex items-center justify-center
+                  peer-checked:bg-background peer-checked:border-foreground
+                  transition-colors duration-200"
+                >
+                  <!-- Checkmark -->
+                  <svg 
+                    v-if="habitData[day.date][habit.key]" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    class="w-4 h-4 text-white" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </span>
+                  <span class="ml-2">
+                    <input 
+                      :id="`${day.date}-${habit.key}-note`"
+                      v-model="habitData[day.date].notes[habit.key]"
+                      @input="saveToLocalStorage"
+                      class="w-50 left-5 relative text-sm font-medium text-center text-main cursor-pointer"
+                      placeholder="enter data"
+                    />
+                    </span>
+                    </label>
             </li>
           </ul>
         </div>
