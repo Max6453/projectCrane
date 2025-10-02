@@ -27,8 +27,8 @@ export default {
     }
   },
   created() {
-    this.loadFromLocalStorage();
-    this.generateMonths();
+    this.generateMonths(); // Generate months first
+    this.loadFromLocalStorage(); // Then load saved data
   },
   watch: {
     moneyData: {
@@ -49,7 +49,7 @@ export default {
         const date = new Date(currentYear, i, 1);
         const monthName = date.toLocaleString('default', { month: 'long' });
         const year = date.getFullYear().toString();
-        const key = `${year}-${i + 1}`;
+        const key = `${year}-${String(i + 1).padStart(2, '0')}`; // Fix month key format
 
         months.push({ monthName, year, key });
 
@@ -60,7 +60,7 @@ export default {
         if (!this.moneyData[year][key]) {
           this.moneyData[year][key] = {
             income: 0,
-            expenses: 0, 
+            expenses: 0
           };
         }
       }
@@ -72,9 +72,10 @@ export default {
       const saved = localStorage.getItem('monthlyMoney');
       if (saved) {
         try {
-          this.moneyData = JSON.parse(saved);
+          const parsed = JSON.parse(saved);
+          this.moneyData = parsed || {};
         } catch (error) {
-          console.error('Error loading money data from localStorage:', error);
+          console.error('Error loading data:', error);
         }
       }
     },
@@ -88,17 +89,34 @@ export default {
     },
 
     updateValue(year: string, key: string, category: string, event: Event): void {
-      const value = (event.target as HTMLTextAreaElement).value;
-      const numValue = value === '' ? 0 : Number(value);
-      this.moneyData[year][key][category] = numValue;
+      const input = (event.target as HTMLTextAreaElement).value;
+      const numValue = input === '' ? 0 : parseFloat(input);
+      if (!isNaN(numValue)) {
+        this.moneyData[year][key][category] = numValue;
+      }
     },
 
     clearAllData(): void {
-      if (confirm('Are you sure you want to clear all money data? This cannot be undone.')) {
+      if (confirm('Are you sure you want to clear all money data?')) {
         this.moneyData = {};
         this.generateMonths();
         localStorage.removeItem('monthlyMoney');
+        this.saveToLocalStorage();
       }
+    }
+  },
+  
+  computed: {
+    // Add computed property for total calculations
+    totals(): { income: number; expenses: number; difference: number } {
+      return this.months.reduce((acc, month) => {
+        const monthData = this.moneyData[month.year][month.key];
+        return {
+          income: acc.income + (monthData.income || 0),
+          expenses: acc.expenses + (monthData.expenses || 0),
+          difference: acc.difference + ((monthData.income || 0) - (monthData.expenses || 0))
+        };
+      }, { income: 0, expenses: 0, difference: 0 });
     }
   }
 }
@@ -117,6 +135,21 @@ export default {
             Clear all
           </button>
           <div class="p-5 pt-5">
+            <!-- Add totals display -->
+            <div class="mb-5 p-4 border border-main rounded">
+              <h2 class="text-xl text-main mb-3">Yearly Totals</h2>
+              <div class="grid grid-cols-3 gap-4 text-white">
+                <div>Income: {{ totals.income }}</div>
+                <div>Expenses: {{ totals.expenses }}</div>
+                <div :class="{
+                  'text-green-500': totals.difference > 0,
+                  'text-red-500': totals.difference < 0,
+                  'text-gray-400': totals.difference === 0
+                }">
+                  Balance: {{ totals.difference }}
+                </div>
+              </div>
+            </div>
             <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 max-sm:grid-cols-1 gap-5">
               <div v-for="month in months" 
                    :key="month.key" 
