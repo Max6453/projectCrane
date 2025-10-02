@@ -58,10 +58,10 @@ export default {
               <router-link to="/money-tracker" class="hover:text-green-300 bg-hover m-5">
                 <li>Money tracker</li>
               </router-link>
-              <router-link to="/test" class="hover:text-green-300 bg-hover">
+              <router-link to="/Notes" class="hover:text-green-300 bg-hover">
                 <li>Notes</li>
               </router-link>
-            <router-link to="healthcare-tracker" class="hover:text-green-300 bg-hover m-5">
+            <router-link to="/healthcare-tracker" class="hover:text-green-300 bg-hover m-5">
               <li>HealthCare tracker</li>
             </router-link>
             </ul>
@@ -79,10 +79,10 @@ export default {
           <router-link to="/money-tracker" class="hover:text-green-300 bg-hover">
             <li>Money tracker</li>
           </router-link>
-          <router-link to="/test" class="hover:text-green-300 bg-hover">
+          <router-link to="/Notes" class="hover:text-green-300 bg-hover">
             <li>Notes</li>
           </router-link>
-        <router-link to="healthcare-tracker" class="hover:text-green-300 bg-hover">
+        <router-link to="/healthcare-tracker" class="hover:text-green-300 bg-hover">
           <li>HealthCare tracker</li>
         </router-link>
         </ul>
