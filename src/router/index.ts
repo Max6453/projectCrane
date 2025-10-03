@@ -6,6 +6,7 @@ import MoneyTracker from '@/Views/MoneyTracker.vue'
 import Account from '@/Views/Account.vue'
 import NotFound from '@/Views/NotFound.vue'
 import Notes from '@/Views/Notes.vue'
+import Premium from '@/Views/Premium.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -38,6 +39,11 @@ const router = createRouter({
     path: '/Account',
     name: 'Account',
     component: Account
+  },
+  {
+    path: '/Premium',
+    name: 'Premium',
+    component: Premium
   },
     {
     path: '/:pathMatch(.*)*',

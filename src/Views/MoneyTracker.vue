@@ -1,10 +1,14 @@
 <script lang="ts">
+type CategoryKey = 'income' | 'expenses';
+
+interface MonthData {
+  income: number;
+  expenses: number;
+}
+
 interface MoneyData {
   [year: string]: {
-    [month: string]: {
-      income: number;
-      expenses: number;
-    }
+    [month: string]: MonthData;
   }
 }
 
@@ -88,11 +92,16 @@ export default {
       }
     },
 
-    updateValue(year: string, key: string, category: string, event: Event): void {
-      const input = (event.target as HTMLTextAreaElement).value;
-      const numValue = input === '' ? 0 : parseFloat(input);
+    updateValue(year: string, key: string, category: CategoryKey, event: Event): void {
+      const input = (event.target as HTMLTextAreaElement).value.trim();
+      if (input === '') {
+        this.moneyData[year][key][category] = 0;
+        return;
+      }
+      const numValue = parseFloat(input);
       if (!isNaN(numValue)) {
         this.moneyData[year][key][category] = numValue;
+        this.saveToLocalStorage();
       }
     },
 
@@ -169,7 +178,7 @@ export default {
                     <textarea 
                       :id="`${month.key}-${category.key}`"
                       :value="moneyData[month.year][month.key][category.key]"
-                      @input="updateValue(month.year, month.key, category.key, $event)"
+                      @input="(e) => updateValue(month.year, month.key, category.key as CategoryKey, e)"
                       class="bg-gray-700 text-white rounded p-2 h-20 resize-none"
                       :placeholder="`Enter ${category.label.toLowerCase()} for ${month.monthName}`"
                     ></textarea>

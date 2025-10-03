@@ -7,6 +7,10 @@ export default {
         name: "Test Subject",
         email: "max@example.com"
       },
+      subscription: {
+        free: "free",
+        premium: "premium"
+      },
     isModalOpen: false,
     isNavbarOpen: false,
   }
@@ -93,16 +97,17 @@ export default {
           :class="isModalOpen ? 'btn-close' : 'btn-open'"
         class="bg-black size-10 absolute bottom-3 active:border-white hover:border border-white right-15 rounded-full">
         </div>
-        <div v-if="isModalOpen" class="modal bg-foreground to-green-700 bg-linear-300 right-0 pt-1 top-20 h-50 w-40 rounded-l-3xl absolute">
+        <div v-if="isModalOpen" class="modal bg-foreground to-green-700 bg-linear-300 right-0 pt-1 top-20 h-60 w-40 rounded-l-3xl absolute">
           <span class="text-center">
             <h3>Welcome back:</h3>
             <h3 class="text-white">{{ user.name }} </h3>
+            <h3>You're using</h3>
+            <h3 class="text-white">{{ subscription.premium }}</h3>
           </span>
           <ul class="border-t-1 flex flex-col gap-y-3 pt-4 text-center text-xl border-gray-500">
             <li class="hover:underline"><a href="/Account">Your Account</a></li>
-            <li class="hover:underline"><a href="">buy premium</a></li>
-            <li class="hover:underline"><a href="">Support</a></li>
-            <li class="hover:underline"><a href=""></a></li>
+            <li class="hover:underline"><a href="/Premium">buy premium</a></li>
+            <li class="hover:underline"><a href="/Support">Support</a></li>
           </ul>
         </div>
       </div>
