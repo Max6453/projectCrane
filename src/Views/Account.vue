@@ -10,6 +10,8 @@
 
 <template>
     <div class="top-40 relative">
-        <h1 class="aboslute text-white text-6xl">Return Soon {{  name }}</h1>
+        <a
+        class="text-5xl text-white left-10  relative"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSeQk00c_H-dmdbZ6fIhyzCIUGz0nlupTnfs0ZNLQZi-hoFunA/viewform?usp=dialog">Survey</a>
     </div>
 </template>
